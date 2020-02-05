@@ -123,7 +123,8 @@ function saveAsPascalVOC(){
         return;
     }else{
         var data = pascalVocFormater.toPascalVOC();
-        askFileName(Object.keys(labellingData[ imgSelected.name ].shapes.length ).length + "_pvoc_imglab.xml", function(fileName){
+        console.log(imgSelected.name)
+        askFileName(`${imgSelected.name.split('.')[0] }.xml`, function(fileName){
             analytics_reportExportType("pascal_voc");
             download(data, fileName, "text/xml", "utf-8");
         });
@@ -150,6 +151,7 @@ function download(data, filename, type, encoding) {
  */
 function askFileName(suggestedName, cb){
     suggestedName || (suggestedName = "Untitled_imgLab" )
+    console.log(suggestedName)
     $.confirm({
         title: 'File Name',
         content: `<input class="form-control"  type"text" id="fileName" value="${suggestedName}" >`,
@@ -174,14 +176,13 @@ function askFileName(suggestedName, cb){
 }
 
 function analytics_reportExportType(type, len){
-    try{
-        gtag('event', 'save_as', {
-            'event_category': type,
-            'event_label': len || Object.keys(labellingData).length,
-            'value' : 1
-        });
-    }catch(e){
+    // try{
+    //     gtag('event', 'save_as', {
+    //         'event_category': type,
+    //         'event_label': len || Object.keys(labellingData).length,
+    //         'value' : 1
+    //     });
+    // }catch(e){
 
-    }
-
+    // }
 }

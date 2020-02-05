@@ -91,6 +91,7 @@
         function readImageFiles(e) {
             var input = e.srcElement || e.target;
             if (input.files && input.files[0]) {
+                console.log(input.files.length)
                 for (i = 0; i < input.files.length; i++) {
                     this.readImageFile(input.files[i]);
                 }
